@@ -6,7 +6,7 @@ import sys
 
 print(len(sys.argv))
 
-if len(sys.argv) is not "3":
+if len(sys.argv) is not 3:
     print("Missing Parameters")
     print("main.py {bucketname} {bucketprefix}")
     exit()
