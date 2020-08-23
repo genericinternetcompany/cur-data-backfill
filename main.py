@@ -65,9 +65,9 @@ print("Downloading Files")
 download_dir(bucketprefix, localpath, bucketname)
 print("Listing Files")
 filelist = getdownloadedfiles(localpath)
-print("Script Execution Complete")
-
+print("Beginning File Conversion")
 for file in filelist:
+    print("Reading: " + file)
     df = pd.read_csv(file, compression='gzip', error_bad_lines=False)
     for col in df.columns:
         col2 = col.replace("/", "_")
@@ -82,6 +82,8 @@ for file in filelist:
         col2 = ''.join(new_list)
         col2 = col2.replace("__", "_")
         df.rename(columns={col: col2}, inplace=True)
+    print("Converting: " + file)
     os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
     df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
 
+print("Script Execution Complete")
