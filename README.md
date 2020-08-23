@@ -28,3 +28,10 @@ $ pip3.8 install -r requirements.txt
 $ python3.8 main.py {bucketname} {bucketprefix}
 ```
 
+## Athena Usage
+
+
+    I used Glue to crawl the new Parquet Files and from there you can use Athena to query or QuickSight to Buiild dashboards. Something I changed in my crawl settings was changing the following setting in the "Configure the crawler's output" screen:
+
+    Grouping behavior for S3 data (optional)
+    Check Create a single schema for each S3 path
