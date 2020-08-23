@@ -85,7 +85,6 @@ for file in filelist:
         df.rename(columns={col: col2}, inplace=True)
     print("Converting: " + file)
     os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
-    wr.s3.to_parquet( df=df, path=file.replace("Raw", "Processed"), dataset=True, mode="overwrite")
-
+    df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
 
 print("Script Execution Complete")
