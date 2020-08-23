@@ -87,6 +87,7 @@ for file in filelist:
     if not os.path.exists(os.path.dirname(file.replace("Raw", "Processed"))):
         os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
     df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
+    print("File Converted. New Filename: " + file.replace("Raw", "Processed") + ".parquet")
 
 
 print("Conversion Complete")
