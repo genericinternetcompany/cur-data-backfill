@@ -82,6 +82,6 @@ for file in filelist:
         col2 = ''.join(new_list)
         col2 = col2.replace("__", "_")
         df.rename(columns={col: col2}, inplace=True)
-    os.makedirs(os.path.dirname(file))
-    df.to_parquet(file + ".parquet")
+    os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
+    df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
 
