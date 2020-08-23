@@ -1,4 +1,5 @@
 import pandas as pd
+import awswrangler as wr
 import boto3
 import os
 
@@ -84,6 +85,7 @@ for file in filelist:
         df.rename(columns={col: col2}, inplace=True)
     print("Converting: " + file)
     os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
-    df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
+    wr.s3.to_parquet( df=df, path=file.replace("Raw", "Processed"), dataset=True, mode="overwrite")
+
 
 print("Script Execution Complete")
