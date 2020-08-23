@@ -6,14 +6,14 @@ import sys
 
 print(len(sys.argv))
 
-if len(sys.argv) is not "1":
+if len(sys.argv) is not "3":
     print("Missing Parameters")
     print("main.py {bucketname} {bucketprefix}")
     exit()
  
-bucketname = sys.argv[0]  # "gic-cust-cost-reports"
-bucketprefix = sys.argv[1]  # "Raw"
-localpath = "s3"
+bucketname = sys.argv[1]  # "gic-cust-cost-reports"
+bucketprefix = sys.argv[2]  # "Raw"
+localpath = "s3-temp"
 
 s3_client = boto3.client('s3', os.environ.get('aws_access_key_id'), os.environ.get('aws_secret_access_key'), os.environ.get('aws_session_token'))
 
