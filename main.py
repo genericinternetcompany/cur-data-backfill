@@ -51,12 +51,12 @@ def download_dir(prefix, local, bucket, client=s3_client):
         print("Finished Downloading " + k)
 
 
-def getdownloadedfiles(path):
+def getdownloadedfiles(path, containskey):
     files = []
     # r=root, d=directories, f = files
     for r, d, f in os.walk(path):
         for file in f:
-            if '.csv.gz' in file:
+            if containskey in file:
                 files.append(os.path.join(r, file))
 
     return files
@@ -65,7 +65,7 @@ def getdownloadedfiles(path):
 print("Downloading Files")
 download_dir(bucketprefix, localpath, bucketname)
 print("Listing Files")
-filelist = getdownloadedfiles(localpath)
+filelist = getdownloadedfiles(localpath, '.csv.gz')
 print("Beginning File Conversion")
 for file in filelist:
     print("Reading: " + file)
@@ -87,5 +87,12 @@ for file in filelist:
     if not os.path.exists(os.path.dirname(file.replace("Raw", "Processed"))):
         os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
     df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
+
+
+print("Conversion Complete")
+
+parquetfiles = getdownloadedfiles(localpath, '.parquet')
+
+print(parquetfiles)
 
 print("Script Execution Complete")
