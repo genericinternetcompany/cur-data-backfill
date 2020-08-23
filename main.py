@@ -95,7 +95,7 @@ parquetfiles = getdownloadedfiles(localpath, '.parquet')
 
 for file in parquetfiles:
     print("Uploading File: " + os.path.basename(file))
-    s3_client.upload_file(file, bucketname, os.path.basename(file))
+    s3_client.upload_file(file, bucketname, file.replace("s3/", ""))
     print("Upload Complete: " + os.path.basename(file))
 
 
