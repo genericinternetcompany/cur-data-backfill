@@ -2,9 +2,17 @@ import pandas as pd
 import awswrangler as wr
 import boto3
 import os
+import sys
 
-bucketname = "gic-cust-cost-reports"
-bucketprefix = "Raw"
+print(len(sys.argv))
+
+if len(sys.argv) is not "1":
+    print("Missing Parameters")
+    print("main.py {bucketname} {bucketprefix}")
+    exit()
+ 
+bucketname = sys.argv[0]  # "gic-cust-cost-reports"
+bucketprefix = sys.argv[1]  # "Raw"
 localpath = "s3"
 
 s3_client = boto3.client('s3', os.environ.get('aws_access_key_id'), os.environ.get('aws_secret_access_key'), os.environ.get('aws_session_token'))
