@@ -69,7 +69,7 @@ filelist = getdownloadedfiles(localpath)
 print("Beginning File Conversion")
 for file in filelist:
     print("Reading: " + file)
-    df = pd.read_csv(file, compression='gzip', error_bad_lines=False)
+    df = pd.read_csv(file, compression='gzip', error_bad_lines=True, dtype = {"product_ecu" : "object"})
     for col in df.columns:
         col2 = col.replace("/", "_")
         col2 = col2.replace(":", "_")
