@@ -25,7 +25,7 @@ $ git clone https://github.com/genericinternetcompany/cur-data-backfill.git
 $ cd cur-data-backfill
 $ sudo su
 $ pip3.8 install -r requirements.txt
-$ python3.8 main.py {bucketname} {bucketprefix}
+$ python3.8 main.py {bucketnameforcurreport} {bucketprefixforbaseofreport}
 ```
 
 ## Athena Usage
