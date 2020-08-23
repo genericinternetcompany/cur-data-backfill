@@ -70,17 +70,18 @@ print("Script Execution Complete")
 for file in filelist:
     df = pd.read_csv(file, compression='gzip', error_bad_lines=False)
     for col in df.columns:
-         col2 = col.replace("/", "_")
-         col2 = col2.replace(":", "_")
-         col2 = col2.replace(" ", "2")
-         list1 = list(col2)
-         new_list = []
-         for i in list1:
-             if i.isupper():
-                 i = "_" + i.lower()
-             new_list.append(i)
-         col2 = ''.join(new_list)
-         col2 = col2.replace("__", "_")
-         df.rename(columns={col: col2}, inplace=True)
-    df.to_parquet(file.replace('Raw', 'Processed') + ".parquet")
+        col2 = col.replace("/", "_")
+        col2 = col2.replace(":", "_")
+        col2 = col2.replace(" ", "2")
+        list1 = list(col2)
+        new_list = []
+        for i in list1:
+            if i.isupper():
+                i = "_" + i.lower()
+            new_list.append(i)
+        col2 = ''.join(new_list)
+        col2 = col2.replace("__", "_")
+        df.rename(columns={col: col2}, inplace=True)
+    os.makedirs(os.path.dirname(file))
+    df.to_parquet(file + ".parquet")
 
