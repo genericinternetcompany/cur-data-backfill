@@ -93,6 +93,11 @@ print("Conversion Complete")
 
 parquetfiles = getdownloadedfiles(localpath, '.parquet')
 
-print(parquetfiles)
+for file in parquetfiles:
+    print("Uploading File: " + os.path.basename(file))
+    s3_client.upload_file(file, bucketname + '/Processed/', os.path.basename(file))
+    print("Upload Complete: " + os.path.basename(file))
+
+
 
 print("Script Execution Complete")
