@@ -84,7 +84,8 @@ for file in filelist:
         col2 = col2.replace("__", "_")
         df.rename(columns={col: col2}, inplace=True)
     print("Converting: " + file)
-    os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
+    if not os.path.exists(os.path.dirname(file.replace("Raw", "Processed"))):
+        os.makedirs(os.path.dirname(file.replace("Raw", "Processed")))
     df.to_parquet(file.replace("Raw", "Processed") + ".parquet")
 
 print("Script Execution Complete")
