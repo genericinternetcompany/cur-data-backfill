@@ -6,7 +6,7 @@ bucketname = "gic-cust-cost-reports"
 bucketprefix = "Raw"
 localpath = "s3"
 
-s3_client = boto3.client('s3', aws_access_key_id='ASIAXNQKKQU5MILNG6US', aws_secret_access_key='Yvp4RgUnrCPG3okslnz8Hocrs68TLxGOLFDXT4YO', aws_session_token='IQoJb3JpZ2luX2VjEJf//////////wEaCXVzLWVhc3QtMSJHMEUCIDcEWDhndv2xzShoJ9y6GQ40YqGsv7eQZ2j5RtqRGQd1AiEA0dJHP93jQlCzKfI5eD0Z6vnWq1TGjwy10iAkPBYzIr4q1QIIgP//////////ARAAGgw1MTAwNDkwMjczODYiDIwqprGMzoKujaLdXSqpAkvOR1s26kwyhk/905Rhc5Ky8GL0y03J61sBCOUzWJba1BiDFw/AWDTxMLRqeFNH+1ofrClcoBYpuuB2E9LO4qqacdLNWgfN9srLGAAx5qfo5l2hI8/drgqMwrscZSZLRv0pnhxOSNEBMr+zm2v+kZ9nIoVVR8b45nsWx8ykFuKknyc6pzcL34jl7b2EGNbA/d44gXgow7QVmfsAzdQnM4qxs3H6piU0aXu8YH5BTsAo/yohsJ5zyChGzwGCUc7qGRVR7BUbcw5bk4Myc7CPenrBjpCq0ZoyNSUin/JigMKPDhNjengJrfp9aKU80dVmPt5zFfdTtk5NMgHY9YPi1GSH8ZNMPy6x2I+njHhzXoLTDetOHrk4NJnjv8eDtWu/oJhiOBNN5C1a5DC5w4b6BTqjAZW0gu0tJXTqQOiF0DBxWxJn2AGG1JKebVFLIzTOc8/RVZ5LxxnHcrO/fN7HeSAvi5Hlgl6qDMu9G28H9abY2irY+ed+rRJL6bng+xsFHGfAUWF1Ps5cY9K4QNmaAukJHB9KuJ44Lp3BjxUjSJAjdkDLl90YgDL3Fm+DzASTYa5+ecFZ8E/QLKUa/s9XU9Nf14T5pysWtxItkj/LEjDx/aZ4pAs=' )
+s3_client = boto3.client('s3', os.environ.get('aws_access_key_id'), os.environ.get('aws_secret_access_key'), os.environ.get('aws_session_token'))
 
 
 def download_dir(prefix, local, bucket, client=s3_client):
@@ -61,8 +61,8 @@ def getdownloadedfiles(path):
     return files
 
 
-#print("Downloading Files")
-#download_dir(bucketprefix, localpath, bucketname)
+print("Downloading Files")
+download_dir(bucketprefix, localpath, bucketname)
 print("Listing Files")
 filelist = getdownloadedfiles(localpath)
 print("Script Execution Complete")
